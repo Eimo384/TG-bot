@@ -7,7 +7,9 @@ def ping_command(update: Update, context: CallbackContext) -> None:
 
     keyboard = [
         [InlineKeyboardButton("🏓 Pong", callback_data='pong_response')],
-        [InlineKeyboardButton("🔙 Back", callback_data='back_to_main')]
+        [InlineKeyboardButton("🔙 Back", callback_data='back_to_main')],
+        [InlineKeyboardButton("📡 Ping", callback_data="ping_response")],
+        [InlineKeyboardButton("📊 Stats", callback_data="stats_response")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
