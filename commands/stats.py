@@ -24,4 +24,5 @@ def stats_command(update: Update, context: CallbackContext) -> None:
 def handle_stats_callback(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     query.answer()
-    stats_command(query, context)
+    stats_command(update, context)
+
