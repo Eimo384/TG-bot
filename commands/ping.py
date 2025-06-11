@@ -1,6 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 from utils.helpers import update_stat
+from commands.menu import main_menu
 
 def ping_command(update: Update, context: CallbackContext) -> None:
     update_stat("ping")
@@ -23,4 +24,5 @@ def handle_ping_callback(update: Update, context: CallbackContext) -> None:
     if data == "pong_response":
         query.edit_message_text("🏓 Pong! That was fast.")
     elif data == "back_to_main":
-        query.edit_message_text("🔙 Returning to main menu... (not yet implemented)")
+        main_menu(update, context, from_query=True)
+
