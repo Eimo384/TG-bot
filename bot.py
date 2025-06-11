@@ -1,23 +1,19 @@
-from commands.stats import stats_command
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler
 from config import BOT_TOKEN
-from commands.ping import start_command, pong_response, back_to_main
-from commands.stats import stats_command, handle_stats_callback
-from commands.menu import main_menu
+from commands.ping import pong_response
+from commands.stats import handle_stats_callback
+from commands.menu import main_menu, handle_main_menu_callback
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    # Register command
-    app.add_handler(CommandHandler("start", start_command))
+    # Start command shows main menu
+    app.add_handler(CommandHandler("start", main_menu))
 
-    # Register callback query handlers
+    # Callback query handlers
     app.add_handler(CallbackQueryHandler(pong_response, pattern="^ping_response$"))
-    app.add_handler(CallbackQueryHandler(back_to_main, pattern="^back_to_main$"))
-    app.add_handler(CallbackQueryHandler(stats_command, pattern="^stats_response$"))
     app.add_handler(CallbackQueryHandler(handle_stats_callback, pattern="^stats_response$"))
-    app.add_handler(CallbackQueryHandler(lambda u, c: main_menu(u, c, from_query=True), pattern="^back_to_main$"))
+    app.add_handler(CallbackQueryHandler(handle_main_menu_callback, pattern="^back_to_main$"))
 
     # Start the bot
     print("Bot is fully loaded and ready. Awaiting launch.")
