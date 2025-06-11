@@ -4,6 +4,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 from config import BOT_TOKEN
 from commands.ping import start_command, pong_response, back_to_main
 from commands.stats import stats_command, handle_stats_callback
+from commands.menu import main_menu
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
@@ -16,6 +17,7 @@ def main():
     app.add_handler(CallbackQueryHandler(back_to_main, pattern="^back_to_main$"))
     app.add_handler(CallbackQueryHandler(stats_command, pattern="^stats_response$"))
     app.add_handler(CallbackQueryHandler(handle_stats_callback, pattern="^stats_response$"))
+    app.add_handler(CallbackQueryHandler(lambda u, c: main_menu(u, c, from_query=True), pattern="^back_to_main$"))
 
     # Start the bot
     print("Bot is fully loaded and ready. Awaiting launch.")
