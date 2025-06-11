@@ -1,6 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 from utils.helpers import get_stat, update_stat
+from commands.menu import main_menu
 
 def stats_command(update: Update, context: CallbackContext) -> None:
     update_stat("stats")
